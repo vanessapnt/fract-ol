@@ -30,4 +30,10 @@ typedef struct s_fractal
     double  hypothenuse;
 }   t_fractal;
 
+typedef struct s_fractal
+{
+    double x;
+    double y;
+}
+
 #endif
