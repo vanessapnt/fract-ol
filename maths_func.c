@@ -36,3 +36,44 @@ void	sum_complex(t_complex *z, t_complex *c)
 	z->x = z->x + c->x;
 	z->y = z->y + c->y;
 }
+static double ft_convert_atod(char *str, int i)
+{
+	double	nbr;
+	double	div;
+
+	nbr = 0.0;
+	div = 1.0;
+	while (str[i] && ft_isdigit(str[i]))
+	{
+		nbr = nbr * 10.0 + (str[i] - '0');
+		i++;
+	}
+	if (str[i] == '.')
+	{
+		i++;
+		while (str[i] && ft_isdigit(str[i]))
+		{
+			nbr = nbr * 10.0 + (str[i] - '0');
+			div *= 10.0;
+			i++;
+		}
+	}
+	return (nbr / div);
+}
+
+double	ft_atod(const char *str)
+{
+    int		i;
+	int		sign;
+
+	sign = 1;
+	i = 0;
+
+    if (str[i] == '+' || str[i] == '-')
+	{
+		if (str[i] == '-')
+			sign = -1;
+		i++;
+	}
+	return (ft_convert_atod(str, i) * sign);
+}
