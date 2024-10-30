@@ -6,11 +6,12 @@
 /*   By: varodrig <varodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:08:40 by varodrig          #+#    #+#             */
-/*   Updated: 2024/10/30 13:29:45 by varodrig         ###   ########.fr       */
+/*   Updated: 2024/10/30 21:14:54 by varodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
+#include <assert.h>
 
 // line_len = length in bytes
 // bpp = bits per pixel
@@ -22,8 +23,11 @@ static void	my_pixel_put(int x, int y, t_img *img, int color)
 {
 	int	offset;
 
-	offset = (y * img->line_len) + (x * (img->bpp / 8));
-	*(unsigned int *)(img->pix_ptr + offset) = color;
+
+	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT) {
+		offset = (y * img->line_len) + (x * (img->bpp / 8));
+		*(unsigned int *)(img->pix_ptr + offset) = color;
+	}
 }
 
 /*JULIA
@@ -34,19 +38,19 @@ static void	my_pixel_put(int x, int y, t_img *img, int color)
 	z0 = 0 + 0i
 	c0 = x + yi
 */
-static void init_z_c(t_complex z, t_complex c, t_fractal *fractal)
+static void	init_z_c(t_complex *z, t_complex *c, t_fractal *fractal)
 {
 	if (fractal->isjulia)
 	{
-		c.x = fractal->julia_x;
-		c.y = fractal->julia_y;
+		c->x = fractal->julia_x;
+		c->y = fractal->julia_y;
 	}
 	else
 	{
-		c.x = z.x;
-		c.y = z.y;
-		z.x = 0.0;
-		z.y = 0.0;
+		c->x = z->x;
+		c->y = z->y;
+	//	z->x = 0.0;
+	//	z->y = 0.0;
 	}
 }
 // converting x and y
@@ -56,22 +60,20 @@ static void init_z_c(t_complex z, t_complex c, t_fractal *fractal)
 // changes z
 // z1 = z0^2 + c
 // color = map(i, BLACK, WHITE, 0, fractal->iterations_defintion);
-static void ft_pixels(double x, double y, t_fractal *fractal)
+static void	ft_pixels(double x, double y, t_fractal *fractal)
 {
 	t_complex	z;
 	t_complex	c;
 	int			i;
 	int			color;
 
-	x = (map(x, -2, +2, 0, WIDTH) * fractal->zoom) + fractal->shift_x;
-	y = (map(y, 2, -2, 0, HEIGHT) * fractal->zoom) + fractal->shift_y;
-	z.x = x;
-	z.y = y;
-	init_z_c(z, c, fractal);
+	z.x = (map(x, -2, +2, 0, WIDTH) * fractal->zoom) + fractal->shift_x;
+	z.y = (map(y, 2, -2, 0, HEIGHT) * fractal->zoom) + fractal->shift_y;
+	init_z_c(&z, &c, fractal);
 	i = 0;
 	while (i < fractal->iterations)
 	{
-		sum_complex(square_complex(&z), &c);
+		z = sum_complex(square_complex(z), c);
 		if ((z.x * z.x) + (z.y * z.y) > fractal->hypothenuse)
 		{
 			color = map(i, 0x000000, 0xFFFFFF, 0, fractal->iterations);

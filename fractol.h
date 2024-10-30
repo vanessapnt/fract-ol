@@ -6,7 +6,7 @@
 /*   By: varodrig <varodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:33:47 by varodrig          #+#    #+#             */
-/*   Updated: 2024/10/30 13:42:20 by varodrig         ###   ########.fr       */
+/*   Updated: 2024/10/30 21:49:25 by varodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,14 +63,15 @@ void		fractal_draw(t_fractal *fractal);
 void		ft_putstr_fd(char *s, int fd);
 
 int			key_hook(int keysym, t_fractal *fractal);
-int			mouse_hook(int button, int keysym, t_fractal *fractal);
+int			mouse_hook(int button, int x, int y, t_fractal *fractal);
 int			end_fractol(t_fractal *fractal);
 
 double		map(double unscaled_num, double new_min, double new_max,
 				double old_min, double old_max);
-t_complex	*square_complex(t_complex *z);
-void		sum_complex(t_complex *z, t_complex *c);
+t_complex	square_complex(t_complex z);
+t_complex	sum_complex(t_complex z, t_complex c);
 double		ft_atod(const char *str);
-int	ft_isdigit(char c);
+void	init_events(t_fractal *fractal);
+int			ft_isdigit(char c);
 
 #endif

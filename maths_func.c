@@ -20,21 +20,26 @@ double	map(double unscaled_num, double new_min, double new_max, double old_min,
 		+ new_min);
 }
 
-t_complex	*square_complex(t_complex *z)
+t_complex	sum_complex(t_complex z1, t_complex z2)
 {
-	double	a;
-	double	b;
+	t_complex	result;
 
-	a = z->x;
-	b = z->y;
-	z->x = (a * a) - (b * b);
-	z->y = 2 * a * b;
-	return(z);
+	result.x = z1.x + z2.x;
+	result.y = z1.y + z2.y;
+	return (result);
 }
 
-void	sum_complex(t_complex *z, t_complex *c)
+/*
+ * SQUARE is trickier
+ *
+ * real = (x^2 - y^2)
+ * i =  2*x*y
+ */
+t_complex	square_complex(t_complex z)
 {
-	z->x = z->x + c->x;
-	z->y = z->y + c->y;
-}
+	t_complex	result;
 
+	result.x = (z.x * z.x) - (z.y * z.y);
+	result.y = 2 * z.x * z.y;
+	return (result);
+}

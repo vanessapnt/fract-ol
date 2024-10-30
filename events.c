@@ -6,7 +6,7 @@
 /*   By: varodrig <varodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:33:41 by varodrig          #+#    #+#             */
-/*   Updated: 2024/10/30 13:33:42 by varodrig         ###   ########.fr       */
+/*   Updated: 2024/10/30 21:48:36 by varodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,10 @@ int	key_hook(int keysym, t_fractal *fractal)
 	return (0);
 }
 
-int	mouse_hook(int button, int keysym, t_fractal *fractal)
+int	mouse_hook(int button, int x, int y, t_fractal *fractal)
 {
+	(void)x;
+	(void)y;
 	if (button == Button5)
 		fractal->zoom *= 0.95;
 	else if (button == Button4)
