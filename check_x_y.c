@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_x_y.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: varodrig <varodrig@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/30 13:33:57 by varodrig          #+#    #+#             */
+/*   Updated: 2024/10/30 13:40:45 by varodrig         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "fractol.h"
 
-int ft_isdigit(char c) 
+int ft_isdigit(char c)
 {
     return (c >= '0' && c <= '9');
 }
@@ -14,7 +26,7 @@ static bool has_integer_part(char **s)
         (*s)++;
     while (ft_isdigit(**s))
     {
-        has_integer_part = true;       
+        has_integer_part = true;
         (*s)++;
     }
     return has_integer_part;
@@ -27,11 +39,11 @@ static bool    has_decimal_part(char **s)
     has_decimal_part = false;
     if (**s == '.')
     {
-        (*s)++;            
+        (*s)++;
         while (ft_isdigit(**s))
         {
             has_decimal_part = true;
-            (*s)++;            
+            (*s)++;
         }
     }
     return has_decimal_part;
