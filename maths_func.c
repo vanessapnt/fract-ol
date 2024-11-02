@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   maths_func->c                                       :+:      :+:    :+:   */
+/*   maths_func.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: varodrig <varodrig@student->42->fr>          +#+  +:+
-	+#+        */
+/*   By: varodrig <varodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 11:21:13 by varodrig          #+#    #+#             */
-/*   Updated: 2024/10/23 13:17:05 by varodrig         ###   ########->fr       */
+/*   Created: 2024/10/31 14:49:54 by varodrig          #+#    #+#             */
+/*   Updated: 2024/10/31 15:19:06 by varodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 
-double	map(double unscaled_num, double new_min, double new_max, double old_min,
-		double old_max)
+double	map(double num, double new_min, double new_max,
+				double old_max)
+
 {
-	return ((new_max - new_min) * (unscaled_num - old_min) / (old_max - old_min)
+	return ((new_max - new_min) * (num - 0) / (old_max - 0)
 		+ new_min);
 }
 
@@ -29,12 +29,6 @@ t_complex	sum_complex(t_complex z1, t_complex z2)
 	return (result);
 }
 
-/*
- * SQUARE is trickier
- *
- * real = (x^2 - y^2)
- * i =  2*x*y
- */
 t_complex	square_complex(t_complex z)
 {
 	t_complex	result;

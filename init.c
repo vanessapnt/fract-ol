@@ -6,7 +6,7 @@
 /*   By: varodrig <varodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:34:01 by varodrig          #+#    #+#             */
-/*   Updated: 2024/10/30 21:41:58 by varodrig         ###   ########.fr       */
+/*   Updated: 2024/10/31 15:06:03 by varodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static void	ft_error(void)
 	ft_putstr_fd("malloc failed\n", STDERR_FILENO);
 	exit(1);
 }
+
 // 2^2 + 2^2 = hypotenuse squared(4)
 static void	data_init(t_fractal *fractal)
 {
@@ -26,7 +27,9 @@ static void	data_init(t_fractal *fractal)
 	fractal->shift_y = 0.0;
 	fractal->zoom = 1.0;
 }
-// establish the connection between key and function so it's used later with mlx_loop
+
+/*establish the connection between key
+and function so it's used later with mlx_loop*/
 void	init_events(t_fractal *fractal)
 {
 	mlx_key_hook(fractal->win_ptr, key_hook, fractal);

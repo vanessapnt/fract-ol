@@ -6,12 +6,11 @@
 /*   By: varodrig <varodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:08:40 by varodrig          #+#    #+#             */
-/*   Updated: 2024/10/30 21:14:54 by varodrig         ###   ########.fr       */
+/*   Updated: 2024/10/31 15:17:40 by varodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
-#include <assert.h>
 
 // line_len = length in bytes
 // bpp = bits per pixel
@@ -23,8 +22,8 @@ static void	my_pixel_put(int x, int y, t_img *img, int color)
 {
 	int	offset;
 
-
-	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT) {
+	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT)
+	{
 		offset = (y * img->line_len) + (x * (img->bpp / 8));
 		*(unsigned int *)(img->pix_ptr + offset) = color;
 	}
@@ -49,8 +48,6 @@ static void	init_z_c(t_complex *z, t_complex *c, t_fractal *fractal)
 	{
 		c->x = z->x;
 		c->y = z->y;
-	//	z->x = 0.0;
-	//	z->y = 0.0;
 	}
 }
 // converting x and y
@@ -60,6 +57,7 @@ static void	init_z_c(t_complex *z, t_complex *c, t_fractal *fractal)
 // changes z
 // z1 = z0^2 + c
 // color = map(i, BLACK, WHITE, 0, fractal->iterations_defintion);
+
 static void	ft_pixels(double x, double y, t_fractal *fractal)
 {
 	t_complex	z;
@@ -67,8 +65,8 @@ static void	ft_pixels(double x, double y, t_fractal *fractal)
 	int			i;
 	int			color;
 
-	z.x = (map(x, -2, +2, 0, WIDTH) * fractal->zoom) + fractal->shift_x;
-	z.y = (map(y, 2, -2, 0, HEIGHT) * fractal->zoom) + fractal->shift_y;
+	z.x = (map(x, -2, +2, WIDTH) * fractal->zoom) + fractal->shift_x;
+	z.y = (map(y, 2, -2, HEIGHT) * fractal->zoom) + fractal->shift_y;
 	init_z_c(&z, &c, fractal);
 	i = 0;
 	while (i < fractal->iterations)
@@ -76,7 +74,7 @@ static void	ft_pixels(double x, double y, t_fractal *fractal)
 		z = sum_complex(square_complex(z), c);
 		if ((z.x * z.x) + (z.y * z.y) > fractal->hypothenuse)
 		{
-			color = map(i, 0x000000, 0xFFFFFF, 0, fractal->iterations);
+			color = map(i, 0x000000, 0xFFFFFF, fractal->iterations);
 			my_pixel_put(x, y, &fractal->img, color);
 			return ;
 		}
@@ -87,8 +85,8 @@ static void	ft_pixels(double x, double y, t_fractal *fractal)
 
 void	fractal_draw(t_fractal *fractal)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < HEIGHT)

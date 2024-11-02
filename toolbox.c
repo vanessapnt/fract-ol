@@ -6,7 +6,7 @@
 /*   By: varodrig <varodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:33:53 by varodrig          #+#    #+#             */
-/*   Updated: 2024/10/30 13:44:13 by varodrig         ###   ########.fr       */
+/*   Updated: 2024/10/31 14:50:32 by varodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,8 @@ double	ft_atod(const char *str)
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	int i;
+	int	i;
+
 	if (NULL == s || fd < 0)
 		return ;
 	i = 0;

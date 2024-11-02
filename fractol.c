@@ -6,7 +6,7 @@
 /*   By: varodrig <varodrig@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/30 13:34:07 by varodrig          #+#    #+#             */
-/*   Updated: 2024/10/30 21:21:13 by varodrig         ###   ########.fr       */
+/*   Updated: 2024/10/31 15:00:56 by varodrig         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,9 @@ int	main(int argc, char **argv)
 	}
 	else
 	{
-		ft_putstr_fd("\"./fractol madelbrot\" or \"./fractol julia x y (x and y being floats)\"",
-			STDERR_FILENO);
+		ft_putstr_fd("invalid parameters :\n", 2);
+		ft_putstr_fd("./fractol mandelbrot\" or\n", 2);
+		ft_putstr_fd("./fractol julia x y (x and y being floats)", 2);
 		exit(1);
 	}
 }
